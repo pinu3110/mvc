@@ -6,7 +6,7 @@ var user = require('../controller/usercontroller')
 
 
 router.post('/',user.insert);
-router.get('/',user.getdata);
+router.get('/get',user.getdata);
 router.get('/update_data/:id',user.get_data_update);
 router.post('/update/:id',user.update);
 router.get('/delete/:id',user.delete);
