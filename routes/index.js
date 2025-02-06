@@ -11,6 +11,8 @@ router.get('/update_data/:id',user.get_data_update);
 router.post('/update/:id',user.update);
 router.get('/delete/:id',user.delete);
 
+router.post('/login',user.login);
+
 
 
 

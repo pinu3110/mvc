@@ -1,4 +1,7 @@
 var user = require('../model/usermodel');
+
+var login_status = 0;
+
 exports.insert=async(req,res)=>{
     user.create(req.body);
     res.status(200).json({
@@ -58,4 +61,40 @@ exports.delete = async(req,res)=>{
         status:'delete data',
         data
     })
+}
+
+exports.login = async (req,res) => {
+    var data = await user.find({"email" : req.body.email});
+
+    if(login_status==0)
+    {
+        if(data.length==1)
+        {
+            login_status=1;
+            if(data[0].password==req.body.password)
+            {
+                res.status(200).json({
+                    status : "login success"
+                })
+            }
+            else
+            {
+                res.status(200).json({
+                    status : "invalid email and password"
+                })
+            }
+        }
+        else
+        {
+            res.status(200).json({
+                status : "invalid email and password"
+            })
+        }
+    }
+    else
+    {
+        res.status(200).json({
+            status : "user already login"
+        })
+    }
 }
